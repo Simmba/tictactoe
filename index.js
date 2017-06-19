@@ -12,10 +12,7 @@ var tictactoe = function (board) {
   board.forEach((elem) => {
     console.log(elem[0] + elem[1] + elem[2]);
   });
-  askX().then(askO).then(tictactoe(board));
-  
-  
-  tictactoe(board);
+  Promise.resolve(askX()).then(askO()).then(tictactoe(board));
 }
 var checker = function (board) {
   for (var i = 0; i < board.length; i++) {
@@ -43,6 +40,7 @@ var placePiece = function (str, char) {
     var resp = readline();
     placePiece(resp, char);
   }
+  return
 }
 var askX = function(){
   rl.question("Place X. Give coordinates! E.g: 0,0 \n", (answer) => {
@@ -53,6 +51,7 @@ var askX = function(){
       console.log(elem[0] + elem[1] + elem[2]);
     });
   });
+  return;
 }
 var askO = function () {
   rl.question("Place O. Give coordinates! E.g: 0,0", (answer) => {
@@ -60,5 +59,6 @@ var askO = function () {
     placePiece(answer);
     checker;
   });
+  return;
 }
 tictactoe();
